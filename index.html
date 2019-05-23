@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<DOCTYPE html>
 <html><head>
 <meta http-equiv="content-type" content="text/html; charset=windows-1252">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -10,10 +10,10 @@
 	<style>
 	html { overflow: hidden; }
 	body { 
-		font: 14pt Arial, sans-serif; 
+		font: 12pt Arial, sans-serif; 
 		background: lightgrey;
-		display: flex;
-		flex-direction: column;
+		// display: flex;
+		// flex-direction: column;
 		height: 100vh;
 		width: 100%;
 		margin: 0 0;
@@ -21,53 +21,95 @@
 	canvas { 
 		display: inline-block; 
 		background: #202020; 
-		width: 95%;
+		width: 90%;
 		height: 45%;
 		box-shadow: 0px 0px 10px blue;
 	}
 	#controls {
 		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: space-around;
-		height: 20%;
+		flex-direction: column;
+		height: 15%;
 		width: 100%;
+		min-height: 160px;
 	}
-	#record { height: 15vh; }
+	#buttons {
+		display: flex;
+		flex-direction: row;
+                text-align: center;
+		align-items: center;
+		padding: 10px 0px;
+		width: 100%;
+		justify-content: space-around;
+	}
+	#progresstext {
+		padding: 10px 0px;
+		text-align: center;
+		margins: auto;
+	}
+	#record, #exit, #save img { max-height: 70px; height: 10vh; width: auto;}
+	// #exit { height: 70px; }
+	// #save, #save img { height: 70px; }
 	#record.recording { 
 		background: red;
 		background: -webkit-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%); 
 		background: -moz-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%); 
 		background: radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%); 
 	}
-	#save, #save img { height: 10vh; }
+
+.column-container {display: flex; width: 100%; height: 100%; flex-direction: row;}
+.second-column { display:flex; flex-direction: column; width: 30%; min-width: 300px; overflow: auto; }
+.first-column { flex: 1 1; border: none; margin: 0; padding: 0; -webkit-overflow-scrolling:touch; }
+.first-column iframe {width: 100%; height: 100%; border: none; margin: 0; padding: 0; display: block;}
+
+	// #save, #save img { height: 10vh; }
+
 	#save { opacity: 0.25;}
 	#save[download] { opacity: 1;}
 	#viz {
-		height: 80%;
+		height: 85%;
 		width: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
 		align-items: center;
 	}
-	@media (orientation: landscape) {
-		body { flex-direction: row;}
-		#controls { flex-direction: column; height: 100%; width: 10%;}
-		#viz { height: 100%; width: 90%;}
+	@media (orientation: portrait) {
+		.column-container { flex-direction: column;}
+		.second-column { width: 100%; height: 40%; }
+		#viz { height: 150px; }
+		#record, #exit, #save img { height: 10vw;}
+		#controls { font-size: 3vw; } 
+		// #controls { flex-direction: column; height: 100%; width: 100%;}
+		// #viz { height: 100%; width: 100%;}
 	}
+
+@supports (-webkit-overflow-scrolling: touch) {
+  .first-column { width: 50%; }
+  .second-column { width: 50%; }
+}
+
 
 	</style>
 </head>
 <body>
+	<div class="column-container">
+	<div class="first-column">
+	<iframe id="iframe" src="https://blogs.ubc.ca/drawl/the-story/"></iframe>
+	</div>
+	<div class="second-column">
 	<div id="viz">
-		<canvas id="analyser" width="1024" height="500"></canvas>
-		<canvas id="wavedisplay" width="1024" height="500"></canvas>
+		<canvas id="analyser" width="1000" height="150"></canvas>
+		<canvas id="wavedisplay" width="1000" height="150"></canvas>
                 <audio id="recorded-audio" controls="controls"></audio>
 	</div>
 	<div id="controls">
-		<img id="record" src="images/mic128.png" onclick="toggleRecording(this);">
-		<a id="save" onclick="startSubmit(this);"><img src="images/save.svg"><br/>Submit Audio</a>
+		<div id="buttons">
+		<div id="record-div"><a href="#" title="Click to start or stop recording" onclick="toggleRecording(document.getElementById('record'));"><img id="record" src="images/mic128.png" width="70" height="70"><br/><div id="rectext">Start/Stop Recording</div></a></div>
+		<div id="save-div"><a id="save" href="#" onclick="startSubmit(this);"><img src="images/save.svg" width="70" height="70"><br/>Submit Recording</a></div>
+		<div id="exit-div"><a href="#" onclick="window.location = document.getElementById('iframe').src;"><img id="exit" width="70" height="70" src="images/exit.png"><br/>Close Recorder</a></div>
+		</div>
+		<div id="progresstext"><div style="color: red;">Recording not yet submitted</div></div>
 	</div>
-<div style="margin:auto;" id="progresstext"><a href="http://blogs.ubc.ca/drawl" target="_parent">Close Recording Pane</a><br/></div>
+	</div>
+	</div>
 </body></html>
