@@ -1,6 +1,7 @@
-<DOCTYPE html>
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Audio Recorder</title>
 
@@ -44,11 +45,8 @@
 	#progresstext {
 		padding: 10px 0px;
 		text-align: center;
-		margins: auto;
 	}
 	#record, #exit, #save img { max-height: 70px; height: 10vh; width: auto;}
-	// #exit { height: 70px; }
-	// #save, #save img { height: 70px; }
 	#record.recording { 
 		background: red;
 		background: -webkit-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%); 
@@ -60,8 +58,6 @@
 .second-column { display:flex; flex-direction: column; width: 30%; min-width: 300px; overflow: auto; }
 .first-column { flex: 1 1; border: none; margin: 0; padding: 0; -webkit-overflow-scrolling:touch; }
 .first-column iframe {width: 100%; height: 100%; border: none; margin: 0; padding: 0; display: block;}
-
-	// #save, #save img { height: 10vh; }
 
 	#save { opacity: 0.25;}
 	#save[download] { opacity: 1;}
@@ -75,12 +71,11 @@
 	}
 	@media (orientation: portrait) {
 		.column-container { flex-direction: column;}
-		.second-column { width: 100%; height: 40%; }
+                .first-column { width: 100%; height: 65%; }
+		.second-column { width: 100%; height: 35%; }
 		#viz { height: 150px; }
-		#record, #exit, #save img { height: 10vw;}
-		#controls { font-size: 3vw; } 
-		// #controls { flex-direction: column; height: 100%; width: 100%;}
-		// #viz { height: 100%; width: 100%;}
+		#record, #exit, #save img { height: 8vh;}
+		#controls { font-size: 2vh; } 
 	}
 
 @supports (-webkit-overflow-scrolling: touch) {
@@ -104,9 +99,9 @@
 	</div>
 	<div id="controls">
 		<div id="buttons">
-		<div id="record-div"><a href="#" title="Click to start or stop recording" onclick="toggleRecording(document.getElementById('record'));"><img id="record" src="images/mic128.png" width="70" height="70"><br/><div id="rectext">Start/Stop Recording</div></a></div>
-		<div id="save-div"><a id="save" href="#" onclick="startSubmit(this);"><img src="images/save.svg" width="70" height="70"><br/>Submit Recording</a></div>
-		<div id="exit-div"><a href="#" onclick="window.location = document.getElementById('iframe').src;"><img id="exit" width="70" height="70" src="images/exit.png"><br/>Close Recorder</a></div>
+		<div id="record-div"><a href="#" title="Click to start or stop recording" onclick="toggleRecording(document.getElementById('record'));"><img id="record" src="images/mic128.png" width="70" height="70" alt="Microphone icon"><br/><div id="rectext">Start/Stop Recording</div></a></div>
+		<div id="save-div"><a id="save" href="#" onclick="startSubmit(this);"><img src="images/save.svg" width="70" height="70" alt="Save icon"><br/>Submit Recording</a></div>
+		<div id="exit-div"><a href="#" onclick="window.location = document.getElementById('iframe').src;"><img id="exit" width="70" height="70" src="images/exit.png" alt="Exit icon"><br/>Close Recorder</a></div>
 		</div>
 		<div id="progresstext"><div style="color: red;">Recording not yet submitted</div></div>
 	</div>
